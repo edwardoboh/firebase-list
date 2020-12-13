@@ -5,10 +5,10 @@ const form = document.querySelector("#add-cafe-form")
 function renderData(doc){
 
     let li = document.createElement("li")
-    li.setAttribute("data-id", doc.id)
     let name = document.createElement("span")
     let city = document.createElement("span")
-
+    
+    li.setAttribute("data-id", doc.id)
     name.textContent = doc.data().name
     city.textContent = doc.data().city
 

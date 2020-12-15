@@ -30,11 +30,29 @@ function renderData(doc){
 
 // 
 async function getData() {
-    const data = await db.collection("cafes").get()
-    data.forEach(doc => {
-        // console.log(doc.data())
-        renderData(doc)
-    });
+    // const data = await db.collection("cafes").get()
+    // data.forEach(doc => {
+    //     // console.log(doc.data())
+    //     renderData(doc)
+    // });
+
+    const data = db.collection("cafes").orderBy("city").onSnapshot((snapshot) => {
+        const allShots = snapshot.docChanges()
+        allShots.forEach((shot) => {
+            // console.log(snapshot)
+            // console.log(allShots)
+            console.log(shot)
+            if(shot.type == "added"){
+                renderData(shot.doc)
+            }
+            else if(shot.type == "removed"){
+                console.log(ul)
+                // console.log(shot.doc.id)
+                let li = ul.querySelector(`li[data-id = ${shot.doc.id}]`)
+                ul.removeChild(li)
+            }
+        })
+    })
 }
 
 // 

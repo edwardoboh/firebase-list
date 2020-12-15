@@ -30,7 +30,7 @@ function renderData(doc){
 
 // 
 async function getData() {
-    const data = await db.collection("cafes").where("city", "==", "new york").get()
+    const data = await db.collection("cafes").get()
     data.forEach(doc => {
         // console.log(doc.data())
         renderData(doc)
@@ -55,6 +55,7 @@ function handleForm() {
         .catch((err) => console.log("Unable to add data to firestore", err))
     })
 }
+
 
 getData()
 handleForm()
